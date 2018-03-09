@@ -1,0 +1,107 @@
+name: "Tiny SEO"
+version: "1.0.0"
+description: "Provide a simple way to manage SEO from admin."
+icon: "sitemap"
+author:
+  name: jimblue
+keywords: 'grav, plugin, seo'
+license: MIT
+homepage: 'https://github.com/jimblue/grav-plugin-tinyseo'
+bugs: 'https://github.com/jimblue/grav-plugin-tinyseo/issues'
+docs: 'https://github.com/jimblue/grav-plugin-tinyseo/blob/master/README.md'
+dependencies:
+  - admin
+form:
+  validation: strict
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        content:
+          type: tab
+          title: Content
+          fields:
+            enabled:
+              type: toggle
+              label: PLUGIN_ADMIN.PLUGIN_STATUS
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+            generic_section:
+              type: section
+              title: Generic meta
+              fields:
+                meta_robots:
+                  type: checkboxes
+                  label: Robots meta
+                  default:
+                    index: true
+                    follow: true
+                    noindex: false
+                    nofollow: false
+                    noimageindex: false
+                  options:
+                    index: index
+                    follow: follow
+                    noindex: noindex
+                    nofollow: nofollow
+                    noimageindex: noimageindex
+                  use: keys
+                description_length:
+                  type: range
+                  label: Description length
+                  placeholder: between 1 - 200
+                  validate:
+                    type: number
+                    min: 1
+                    max: 200
+                backup_image:
+                  type: filepicker
+                  size: large
+                  label: Backup image
+                  folder: 'user/plugins/tinyseo/images'
+                  preview_images: true
+                  accept:
+                    - .png
+                    - .jpg
+            twitter_section:
+              type: section
+              title: Twitter meta
+              fields:
+                twitterid:
+                  type: text
+                  size: large
+                  label: Twitter ID
+                  placeholder: '@yourusername'
+                twitter_card_type:
+                  type: select
+                  size: large
+                  label: Select twitter card type
+                  options:
+                    summary: Summary
+                    summary_large_image: Summary Large Image
+            facebook_section:
+              type: section
+              title: Facebook meta
+              fields:
+                facebookid:
+                  type: text
+                  size: large
+                  label: Facebook App ID
+        medias:
+          type: tab
+          title: Medias
+          fields:
+            images:
+              type: file
+              destination: 'user/plugins/tinyseo/images'
+              multiple: true
+              style: vertical
+              accept:
+                - .png
+                - .jpg
