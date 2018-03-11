@@ -159,42 +159,30 @@ class TinyseoPlugin extends Plugin
   {
     // OpenGraph site meta
     $meta['og:sitename'] = [
-      'name' => 'og:sitename',
       'property' => 'og:sitename',
       'content' => $this->config['site.title']
     ];
 
-    // OpenGraph locale meta
-    $meta['og:locale'] = [
-      'name' => 'og:locale',
-      'property' => 'og:locale',
-      'content' => $this->grav['language']->getActive()
-    ];
-
     // OpenGraph type meta
     $meta['og:type'] = [
-      'name' => 'og:type',
       'property' => 'og:type',
       'content' => 'article'
     ];
 
     // OpenGraph url meta
     $meta['og:url'] = [
-      'name' => 'og:url',
       'property' => 'og:url',
       'content' => $this->grav['uri']->url(true)
     ];
 
     // OpenGraph title meta
     $meta['og:title'] = [
-      'name' => 'og:title',
       'property' => 'og:title',
       'content' => $pageTitle
     ];
 
     // OpenGraph description meta
     $meta['og:description'] = [
-      'name' => 'og:description',
       'property' => 'og:description',
       'content' => $pageDescription
     ];
@@ -202,7 +190,6 @@ class TinyseoPlugin extends Plugin
     // OpenGraph image meta
     if ($this->getImage()) {
       $meta['og:image'] = [
-        'name' => 'og:image',
         'property' => 'og:image',
         'content' => $this->getImage()
       ];
@@ -219,7 +206,6 @@ class TinyseoPlugin extends Plugin
     // Facebook id
     if ($config['facebookid']) {
       $meta['fb:app_id'] = [
-        'name' => 'fb:app_id',
         'property' => 'fb:app_id',
         'content' => $config['facebookid']
       ];
@@ -236,7 +222,6 @@ class TinyseoPlugin extends Plugin
     // Twitter id
     if ($config['twitterid']) {
       $meta['twitter:site'] = [
-        'name' => 'twitter:site',
         'property' => 'twitter:site',
         'content' => $config['twitterid']
       ];
@@ -244,7 +229,6 @@ class TinyseoPlugin extends Plugin
 
     // Twitter card type
     $meta['twitter:card'] = [
-      'name' => 'twitter:card',
       'property' => 'twitter:card',
       'content' => $config['twitter_card_type'] ? : 'summary_large_image'
     ];
