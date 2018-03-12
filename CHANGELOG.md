@@ -1,3 +1,9 @@
+# v1.0.3
+## 03/12/2018
+
+1. [](#bugfix)
+   * remove og:sitename because uncompatible with og:type article for facebook
+
 # v1.0.2
 ## 03/11/2018
 
