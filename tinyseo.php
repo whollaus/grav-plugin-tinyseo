@@ -157,12 +157,6 @@ class TinyseoPlugin extends Plugin
    */
   private function getOpenGraphMeta($meta, $pageTitle, $pageDescription, $config)
   {
-    // OpenGraph site meta
-    $meta['og:sitename'] = [
-      'property' => 'og:sitename',
-      'content' => $this->config['site.title']
-    ];
-
     // OpenGraph type meta
     $meta['og:type'] = [
       'property' => 'og:type',
