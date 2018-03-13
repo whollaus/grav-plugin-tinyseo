@@ -3,7 +3,6 @@
 
 1. [](#new)
    * add site title option
-
 1. [](#improved)
    * overall cleanup
 
