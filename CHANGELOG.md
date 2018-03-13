@@ -1,3 +1,12 @@
+# v1.0.4
+## 03/13/2018
+
+1. [](#new)
+   * add site title option
+
+1. [](#improved)
+   * overall cleanup
+
 # v1.0.3
 ## 03/12/2018
 
