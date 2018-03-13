@@ -70,8 +70,8 @@ class TinyseoPlugin extends Plugin
     $config = $this->mergeConfig($page);
 
     // Define page title and page description once
-    $pageTitle = $this->getPageTitle();
-    $pageDescription = $this->getPageDescription();
+    $pageTitle = $this->metaTitle();
+    $pageDescription = $this->metaDescription();
 
     /**
      * Set metas
@@ -182,10 +182,10 @@ class TinyseoPlugin extends Plugin
     ];
 
     // OpenGraph image meta
-    if ($this->getImage()) {
+    if ($this->metaImage()) {
       $meta['og:image'] = [
         'property' => 'og:image',
-        'content' => $this->getImage()
+        'content' => $this->metaImage()
       ];
     }
 
@@ -297,41 +297,47 @@ class TinyseoPlugin extends Plugin
   }
 
   /**
-   * Get page title
+   * Get meta Title
    */
-  private function getPageTitle()
-  {
-    $page = $this->grav['page'];
-    $header = $page->header();
-    $defaultTitle = $this->cleanString($page->title());
-
-    return isset($header->override_default_title) ? $header->override_default_title : $defaultTitle;
-
-  }
-
-  /**
-   * Get page description
-   */
-  private function getPageDescription()
+  private function metaTitle()
   {
     $config = $this->config;
     $page = $this->grav['page'];
     $header = $page->header();
-    $content = substr(strip_tags($page->content()), 0, 1000);
-    $defaultDescription = $this->cleanText($content, $config);
+    $default_title = $this->cleanString($page->title());
+    $page_title = isset($header->override_default_title) ? $header->override_default_title : $default_title;
+    $site_title = $config['plugins.tinyseo.site_title'];
+    $meta_title = isset($site_title) ? $page_title . ' | ' . $site_title : $page_title;
 
-    return isset($header->override_default_desc) ? $header->override_default_desc : $defaultDescription;
+    return $meta_title;
+
   }
 
   /**
-   * Get Image
+   * Get meta Description
    */
-  private function getImage()
+  private function metaDescription()
   {
     $config = $this->config;
     $page = $this->grav['page'];
     $header = $page->header();
-    $image = null;
+    $page_content = substr(strip_tags($page->content()), 0, 1000);
+    $default_description = $this->cleanText($page_content, $config);
+    $meta_description = isset($header->override_default_desc) ? $header->override_default_desc : $default_description;
+
+    return $meta_description;
+  }
+
+  /**
+   * Get meta Image
+   */
+  private function metaImage()
+  {
+    $config = $this->config;
+    $page = $this->grav['page'];
+    $header = $page->header();
+    $base_uri = $this->grav['uri']->base();
+    $meta_image = null;
 
     if (!empty($page->value('media.image'))) {
       $images = $page->media()->images();
@@ -344,56 +350,58 @@ class TinyseoPlugin extends Plugin
         $page_image = array_shift($images);
       }
 
-      $image = $this->grav['uri']->base() . $page_image->url();
+      $meta_image = $base_uri . $page_image->url();
 
     } elseif (isset($config['plugins.tinyseo.backup_image'])) {
-      $path = '/user/plugins/tinyseo/images/';
+      $tinyseo_image_folder = '/user/plugins/tinyseo/images/';
       $backup_image = $config['plugins.tinyseo.backup_image'];
-      $image = $this->grav['uri']->base() . $path . $backup_image;
+      $meta_image = $base_uri . $tinyseo_image_folder . $backup_image;
     }
 
-    return $image;
+    return $meta_image;
   }
 
   /**
-   * Get efault page title for admin blueprint
+   * Get efault meta title for admin blueprint
    */
-  public static function defaultPageTitle()
-  {
-    $admin_page = Grav::instance()['admin']->page(true);
-    $default_title = self::cleanString($admin_page->title());
-
-    return $default_title;
-  }
-
-  /**
-   * Get default page description for admin blueprint
-   */
-  public static function defaultPageDescription()
+  public static function defaultMetaTitle()
   {
     $config = Grav::instance()['config'];
-    $admin_page = Grav::instance()['admin']->page(true);
-    $header = $admin_page->header();
-    $content = substr(strip_tags($admin_page->content()), 0, 1000);
-    $default_description = self::cleanText($content, $config);
+    $page = Grav::instance()['admin']->page(true);
+    $page_title = self::cleanString($page->title());
+    $site_title = $config['plugins.tinyseo.site_title'];
+    $meta_title = isset($site_title) ? $page_title . ' | ' . $site_title : $page_title;
 
-    return $default_description;
+    return $meta_title;
   }
 
   /**
-   * Get default Image for admin blueprint
+   * Get default meta description for admin blueprint
    */
-  public static function defaultImage()
+  public static function defaultMetaDescription()
   {
-    $admin_page = Grav::instance()['admin']->page(true);
-    $default_image = null;
+    $config = Grav::instance()['config'];
+    $page = Grav::instance()['admin']->page(true);
+    $page_content = substr(strip_tags($page->content()), 0, 1000);
+    $meta_description = self::cleanText($page_content, $config);
 
-    if (!empty($admin_page->value('media.image'))) {
-      $images = $admin_page->media()->images();
+    return $meta_description;
+  }
+
+  /**
+   * Get default meta Image for admin blueprint
+   */
+  public static function defaultMetaImage()
+  {
+    $page = Grav::instance()['admin']->page(true);
+    $meta_image = null;
+
+    if (!empty($page->value('media.image'))) {
+      $images = $page->media()->images();
       $first_image = array_shift($images);
-      $default_image = basename($first_image->url());
+      $meta_image = basename($first_image->url());
     }
 
-    return $default_image;
+    return $meta_image;
   }
 }

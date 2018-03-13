@@ -34,19 +34,19 @@ form:
                   autofocus: true
                   toggleable: true
                   label: Title
-                  data-default@: '\Grav\Plugin\TinyseoPlugin::defaultPageTitle'
+                  data-default@: '\Grav\Plugin\TinyseoPlugin::defaultMetaTitle'
                 header.override_default_desc:
                   type: textarea
                   size: large
                   toggleable: true
                   label: Description
-                  data-default@: '\Grav\Plugin\TinyseoPlugin::defaultPageDescription'
+                  data-default@: '\Grav\Plugin\TinyseoPlugin::defaultMetaDescription'
                 header.override_default_img:
                   type: pagemediaselect
                   size: large
                   toggleable: true
                   label: Image
-                  data-default@: '\Grav\Plugin\TinyseoPlugin::defaultImage'
+                  data-default@: '\Grav\Plugin\TinyseoPlugin::defaultMetaImage'
                   preview_images: true
                   accept:
                     - .png

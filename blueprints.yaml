@@ -69,6 +69,12 @@ form:
                   accept:
                     - .png
                     - .jpg
+                site_title:
+                  type: text
+                  size: large
+                  label: Site title
+                  placeholder: website title
+                  config-default@: site.title
             twitter_section:
               type: section
               title: Twitter meta
