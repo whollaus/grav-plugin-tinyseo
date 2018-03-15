@@ -35,6 +35,7 @@ form:
             generic_section:
               type: section
               title: Generic meta
+              underline: true
               fields:
                 meta_robots:
                   type: checkboxes
@@ -78,6 +79,7 @@ form:
             twitter_section:
               type: section
               title: Twitter meta
+              underline: true
               fields:
                 twitterid:
                   type: text
@@ -94,6 +96,7 @@ form:
             facebook_section:
               type: section
               title: Facebook meta
+              underline: true
               fields:
                 facebookid:
                   type: text

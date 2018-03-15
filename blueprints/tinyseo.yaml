@@ -11,6 +11,7 @@ form:
             generic_section:
               type: section
               title: Generic meta
+              underline: true
               fields:
                 header.meta_robots:
                   type: checkboxes
@@ -27,6 +28,7 @@ form:
             default_section:
               type: section
               title: Default meta
+              underline: true
               fields:
                 header.override_default_title:
                   type: text
