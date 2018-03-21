@@ -1,9 +1,14 @@
+# v1.0.5
+## 03/21/2018
+
+1. [](#new)
+   * add fr translation
+
 # v1.0.4
 ## 03/13/2018
 
 1. [](#new)
    * add site title option
-
 1. [](#improved)
    * overall cleanup
 

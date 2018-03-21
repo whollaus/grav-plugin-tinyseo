@@ -1,0 +1,8 @@
+PLUGIN_TINYSEO:
+  GENERIC: Generic
+  DESCRIPTION_LABEL: Description length
+  DESCRIPTION_PLACEHOLDER: between 1 - 200
+  BACKUP_IMAGE: Backup image
+  SITE_TITLE: Site title
+  TWITTER: Select twitter card type
+  TITLE: title
