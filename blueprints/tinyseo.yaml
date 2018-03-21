@@ -8,46 +8,38 @@ form:
           type: tab
           title: SEO
           fields:
-            generic_section:
-              type: section
-              title: Generic meta
-              fields:
-                header.meta_robots:
-                  type: checkboxes
-                  label: Robots meta
-                  toggleable: true
-                  config-default@: plugins.tinyseo.meta_robots
-                  options:
-                    index: index
-                    follow: follow
-                    noindex: noindex
-                    nofollow: nofollow
-                    noimageindex: noimageindex
-                  use: keys
-            default_section:
-              type: section
-              title: Default meta
-              fields:
-                header.override_default_title:
-                  type: text
-                  size: large
-                  autofocus: true
-                  toggleable: true
-                  label: Title
-                  data-default@: '\Grav\Plugin\TinyseoPlugin::defaultMetaTitle'
-                header.override_default_desc:
-                  type: textarea
-                  size: large
-                  toggleable: true
-                  label: Description
-                  data-default@: '\Grav\Plugin\TinyseoPlugin::defaultMetaDescription'
-                header.override_default_img:
-                  type: pagemediaselect
-                  size: large
-                  toggleable: true
-                  label: Image
-                  data-default@: '\Grav\Plugin\TinyseoPlugin::defaultMetaImage'
-                  preview_images: true
-                  accept:
-                    - .png
-                    - .jpg
+            header.meta_robots:
+              type: checkboxes
+              label: Robots
+              toggleable: true
+              config-default@: plugins.tinyseo.meta_robots
+              options:
+                index: index
+                follow: follow
+                noindex: noindex
+                nofollow: nofollow
+                noimageindex: noimageindex
+              use: keys
+            header.override_default_title:
+              type: text
+              size: large
+              autofocus: true
+              toggleable: true
+              label: PLUGIN_TINYSEO.TITLE
+              data-default@: '\Grav\Plugin\TinyseoPlugin::defaultMetaTitle'
+            header.override_default_desc:
+              type: textarea
+              size: large
+              toggleable: true
+              label: Description
+              data-default@: '\Grav\Plugin\TinyseoPlugin::defaultMetaDescription'
+            header.override_default_img:
+              type: pagemediaselect
+              size: large
+              toggleable: true
+              label: Image
+              data-default@: '\Grav\Plugin\TinyseoPlugin::defaultMetaImage'
+              preview_images: true
+              accept:
+                - .png
+                - .jpg
