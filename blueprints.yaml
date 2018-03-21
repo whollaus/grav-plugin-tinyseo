@@ -32,14 +32,14 @@ form:
                 0: PLUGIN_ADMIN.DISABLED
               validate:
                 type: bool
-            generic_section:
+            OPTIONS_section:
               type: section
-              title: Generic meta
+              title: PLUGIN_TINYSEO.GENERIC
               underline: true
               fields:
                 meta_robots:
                   type: checkboxes
-                  label: Robots meta
+                  label: Robots
                   default:
                     index: true
                     follow: true
@@ -55,8 +55,8 @@ form:
                   use: keys
                 description_length:
                   type: range
-                  label: Description length
-                  placeholder: between 1 - 200
+                  label: PLUGIN_TINYSEO.DESCRIPTION_LABEL
+                  placeholder: PLUGIN_TINYSEO.DESCRIPTION_PLACEHOLDER
                   validate:
                     type: number
                     min: 1
@@ -64,7 +64,7 @@ form:
                 backup_image:
                   type: filepicker
                   size: large
-                  label: Backup image
+                  label: PLUGIN_TINYSEO.BACKUP_IMAGE
                   folder: 'user/plugins/tinyseo/images'
                   preview_images: true
                   accept:
@@ -73,29 +73,27 @@ form:
                 site_title:
                   type: text
                   size: large
-                  label: Site title
-                  placeholder: website title
+                  label: PLUGIN_TINYSEO.SITE_TITLE
                   config-default@: site.title
             twitter_section:
               type: section
-              title: Twitter meta
+              title: Twitter
               underline: true
               fields:
                 twitterid:
                   type: text
                   size: large
                   label: Twitter ID
-                  placeholder: '@yourusername'
                 twitter_card_type:
                   type: select
                   size: large
-                  label: Select twitter card type
+                  label: PLUGIN_TINYSEO.TWITTER
                   options:
                     summary: Summary
                     summary_large_image: Summary Large Image
             facebook_section:
               type: section
-              title: Facebook meta
+              title: Facebook
               underline: true
               fields:
                 facebookid:
