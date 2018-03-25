@@ -106,7 +106,7 @@ form:
           fields:
             images:
               type: file
-              destination: 'user/plugins/tinyseo/images'
+              destination: 'theme@:/medias/uploaded'
               multiple: true
               style: vertical
               accept:
