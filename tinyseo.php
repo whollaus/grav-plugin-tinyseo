@@ -269,17 +269,17 @@ class TinyseoPlugin extends Plugin
    */
   public static function cleanText($content, $config)
   {
-    $length = $config['plugins.tinyseo.description_length'];
+    $maxLength = $config['plugins.tinyseo.description_length'];
 
-    if ($length <= 1) $length = 20;
+    if ($maxLength <= 1) $maxLength = 20;
 
-    $content = self::cleanMarkdown($content);
+    $content = self::cleanMarkdown($content, $maxLength);
 
     // truncate the content to the number of words set in config
-    $contentSmall = preg_replace('/((\w+\W*){' . $length . '}(\w+))(.*)/', '${1}', $content);
+    $contentSmall = self::truncateStringAtWord($content, $maxLength);
 
-    // beware if content is less than length words, it will be nulled
-    if ($contentSmall == '') $contentSmall = $content;
+    // beware if content is less than maxLength words, it will be nulled
+    if ($contentSmall === '') $contentSmall = $content;
 
     return $contentSmall;
   }
@@ -294,6 +294,30 @@ class TinyseoPlugin extends Plugin
     $content = trim($content);
 
     return $content;
+  }
+
+  /**
+   * Truncate string at word
+   */
+  private static function truncateStringAtWord($string, $limit)
+  {
+    $break = '.';
+    $pad = '...';
+
+    if (strlen($string) <= $limit) return $string;
+
+    if (false !== ($max = strpos($string, $break, $limit))) {
+
+      if ($max < strlen($string) - 1) {
+
+        $string = substr($string, 0, $max) . $pad;
+
+      }
+
+    }
+
+    return $string;
+
   }
 
   /**

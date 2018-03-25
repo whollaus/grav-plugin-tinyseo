@@ -1,3 +1,12 @@
+# v1.0.6
+## 03/25/2018
+
+1. [](#bugfix)
+   * fix description lengh. now truncate unit is charater. (before was word)
+
+1. [](#bugfix)
+   * fix image folder deleted on upgrade plugin (need upload ogimage again)
+
 # v1.0.5
 ## 03/21/2018
 
