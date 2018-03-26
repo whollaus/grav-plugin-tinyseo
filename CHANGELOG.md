@@ -1,3 +1,9 @@
+# v1.0.7
+## 03/26/2018
+
+1. [](#improved)
+   * better handling of meta robots
+
 # v1.0.6
 ## 03/25/2018
 
