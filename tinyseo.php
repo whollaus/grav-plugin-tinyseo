@@ -276,12 +276,10 @@ class TinyseoPlugin extends Plugin
   {
     $maxLength = $config['plugins.tinyseo.description_length'];
 
-    if ($maxLength <= 1) $maxLength = 20;
-
-    $content = self::cleanMarkdown($content, $maxLength);
+    $content = static::cleanMarkdown($content);
 
     // truncate the content to the number of words set in config
-    $contentSmall = self::truncateStringAtWord($content, $maxLength);
+    $contentSmall = static::truncateStringAtWord($content, $maxLength, true);
 
     // beware if content is less than maxLength words, it will be nulled
     if ($contentSmall === '') $contentSmall = $content;
@@ -304,22 +302,21 @@ class TinyseoPlugin extends Plugin
   /**
    * Truncate string at word
    */
-  private static function truncateStringAtWord($string, $limit)
+  private static function truncateStringAtWord($string, $limit, $up_to_break = false, $break = " ", $pad = "&hellip;")
   {
-    $break = '.';
-    $pad = '...';
+    // return with no change if string is shorter than $limit
+    if (mb_strlen($string) <= $limit) return $string;
 
-    if (strlen($string) <= $limit) return $string;
-
-    if (false !== ($max = strpos($string, $break, $limit))) {
-      if ($max < strlen($string) - 1) {
-        $string = substr($string, 0, $max) . $pad;
+    // is $break present between $limit and the end of the string?
+    if ($up_to_break && false !== ($breakpoint = mb_strpos($string, $break, $limit))) {
+      if ($breakpoint < mb_strlen($string) - 1) {
+        $string = mb_substr($string, 0, $breakpoint) . $pad;
       }
-
+    } else {
+      $string = mb_substr($string, 0, $limit) . $pad;
     }
 
     return $string;
-
   }
 
   /**
@@ -419,7 +416,7 @@ class TinyseoPlugin extends Plugin
   {
     $config = Grav::instance()['config'];
     $page = Grav::instance()['admin']->page(true);
-    $page_title = self::cleanString($page->title());
+    $page_title = static::cleanString($page->title());
     $site_title = $config['plugins.tinyseo.site_title'];
     $meta_title = isset($site_title) ? $page_title . ' | ' . $site_title : $page_title;
 
@@ -434,7 +431,7 @@ class TinyseoPlugin extends Plugin
     $config = Grav::instance()['config'];
     $page = Grav::instance()['admin']->page(true);
     $page_content = substr(strip_tags($page->content()), 0, 1000);
-    $meta_description = self::cleanText($page_content, $config);
+    $meta_description = static::cleanText($page_content, $config);
 
     return $meta_description;
   }
