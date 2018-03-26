@@ -108,7 +108,7 @@ class TinyseoPlugin extends Plugin
   }
 
   /**
-   * Get Robots metadata
+   * Get Robots meta
    */
   private function getRobotsMeta($meta, $header, $config)
   {
@@ -118,29 +118,34 @@ class TinyseoPlugin extends Plugin
         return $value === true;
       }));
     }
+    // Check if page does not already have meta robots
+    if (!isset($meta['robots'])) {
 
-    $pageMetaRobotsEnabled = isset($header->meta_robots) ? metaRobotsEnabled($header->meta_robots) : false;
-    $pluginMetaRobotsEnabled = metaRobotsEnabled($config['meta_robots']);
+      $pageMetaRobotsEnabled = isset($header->meta_robots) ? metaRobotsEnabled($header->meta_robots) : false;
+      $pluginMetaRobotsEnabled = metaRobotsEnabled($config['meta_robots']);
 
-    if ($pageMetaRobotsEnabled) $metaRobots = $header->meta_robots;
-    elseif ($pluginMetaRobotsEnabled) $metaRobots = $config['meta_robots'];
+      // If Tinseo have page wide meta robots use it
+      // Else if Tinyseo have site wide meta robots use it
+      if ($pageMetaRobotsEnabled) $metaRobots = $header->meta_robots;
+      elseif ($pluginMetaRobotsEnabled) $metaRobots = $config['meta_robots'];
 
+      // Robots meta
+      if (isset($metaRobots)) {
+        $filteredArray = array_keys($metaRobots, true);
+        $robotsContent = implode(', ', $filteredArray);
 
-    if (isset($metaRobots)) {
-      $filteredArray = array_keys($metaRobots, true);
-      $robotsDescription = implode(', ', $filteredArray);
-
-      $meta['robots'] = [
-        'name' => 'robots',
-        'content' => $robotsDescription
-      ];
+        $meta['robots'] = [
+          'name' => 'robots',
+          'content' => $robotsContent
+        ];
+      }
     }
 
     return $meta;
   }
 
   /**
-   * Get description metadata
+   * Get description meta
    */
   private function getDescriptionMeta($meta, $pageDescription)
   {
@@ -153,7 +158,7 @@ class TinyseoPlugin extends Plugin
   }
 
   /**
-   * Get OpenGraph metadata
+   * Get OpenGraph meta
    */
   private function getOpenGraphMeta($meta, $pageTitle, $pageDescription, $config)
   {
@@ -193,7 +198,7 @@ class TinyseoPlugin extends Plugin
   }
 
   /**
-   * Get Facebook metadata
+   * Get Facebook meta
    */
   private function getFacebookMeta($meta, $config)
   {
@@ -209,7 +214,7 @@ class TinyseoPlugin extends Plugin
   }
 
   /**
-   * Get Twitter metadata
+   * Get Twitter meta
    */
   private function getTwitterMeta($meta, $config)
   {
@@ -307,11 +312,8 @@ class TinyseoPlugin extends Plugin
     if (strlen($string) <= $limit) return $string;
 
     if (false !== ($max = strpos($string, $break, $limit))) {
-
       if ($max < strlen($string) - 1) {
-
         $string = substr($string, 0, $max) . $pad;
-
       }
 
     }
@@ -386,7 +388,32 @@ class TinyseoPlugin extends Plugin
   }
 
   /**
-   * Get efault meta title for admin blueprint
+   * Get default robots meta for admin blueprint
+   */
+  public static function defaultRobotsMeta()
+  {
+    $config = Grav::instance()['config'];
+    $page = Grav::instance()['admin']->page(true);
+    $meta = $page->metadata();
+
+    // Default meta robots from Tinyseo config
+    $meta_robots = $config['plugins.tinyseo.meta_robots'];
+
+    // If page have meta robots
+    if (isset($meta['robots'])) {
+      $pageMetaRobotsList = str_replace(' ', '', $meta['robots']['content']);
+      $pageMetaRobotsArray = explode(',', $pageMetaRobotsList);
+      $pageMetaRobots = array_fill_keys($pageMetaRobotsArray, true);
+
+      $meta_robots = $pageMetaRobots;
+    };
+
+    return $meta_robots;
+  }
+
+
+  /**
+   * Get default meta title for admin blueprint
    */
   public static function defaultMetaTitle()
   {

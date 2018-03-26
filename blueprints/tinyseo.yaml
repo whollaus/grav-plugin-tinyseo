@@ -12,7 +12,7 @@ form:
               type: checkboxes
               label: Robots
               toggleable: true
-              config-default@: plugins.tinyseo.meta_robots
+              data-default@: '\Grav\Plugin\TinyseoPlugin::defaultRobotsMeta'
               options:
                 index: index
                 follow: follow
