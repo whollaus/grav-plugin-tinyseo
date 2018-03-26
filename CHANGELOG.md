@@ -1,8 +1,14 @@
+# v1.0.7
+## 03/26/2018
+
+1. [](#improved)
+   * better handling of meta robots
+
 # v1.0.6
 ## 03/25/2018
 
 1. [](#bugfix)
-   * fix description lengh. now truncate unit is charater. (before was word)
+   * fix description length. now truncate unit is character. (before was word)
 
 1. [](#bugfix)
    * fix image folder deleted on upgrade plugin (need upload ogimage again)
