@@ -274,19 +274,31 @@ class TinyseoPlugin extends Plugin
    */
   public static function cleanText($content, $config)
   {
+    $content = static::cleanMarkdown($content);
+
+    // Max length option
     $maxLength = $config['plugins.tinyseo.description_length'];
 
-    if ($maxLength <= 1) $maxLength = 20;
-
-    $content = self::cleanMarkdown($content, $maxLength);
+    // Truncate options
+    $truncateBreak = $config['plugins.tinyseo.truncate_break'];
+    if ($truncateBreak === 'character') {
+      $upToBreak = false;
+      $break = ' ';
+    } elseif ($truncateBreak === 'world') {
+      $upToBreak = true;
+      $break = ' ';
+    } elseif ($truncateBreak === 'sentence') {
+      $upToBreak = true;
+      $break = '.';
+    }
 
     // truncate the content to the number of words set in config
-    $contentSmall = self::truncateStringAtWord($content, $maxLength);
+    $truncateContent = static::truncateStringAtWord($content, $maxLength, $upToBreak, $break);
 
     // beware if content is less than maxLength words, it will be nulled
-    if ($contentSmall === '') $contentSmall = $content;
+    if ($truncateContent === '') $truncateContent = $content;
 
-    return $contentSmall;
+    return $truncateContent;
   }
 
   /**
@@ -304,22 +316,23 @@ class TinyseoPlugin extends Plugin
   /**
    * Truncate string at word
    */
-  private static function truncateStringAtWord($string, $limit)
+  private static function truncateStringAtWord($string, $limit, $upToBreak = false, $break = ' ')
   {
-    $break = '.';
-    $pad = '...';
+    $pad = '&hellip;';
 
-    if (strlen($string) <= $limit) return $string;
+    // return with no change if string is shorter than $limit
+    if (mb_strlen($string) <= $limit) return $string;
 
-    if (false !== ($max = strpos($string, $break, $limit))) {
-      if ($max < strlen($string) - 1) {
-        $string = substr($string, 0, $max) . $pad;
+    // is $break present between $limit and the end of the string?
+    if ($upToBreak && false !== ($breakpoint = mb_strpos($string, $break, $limit))) {
+      if ($breakpoint < mb_strlen($string) - 1) {
+        $string = mb_substr($string, 0, $breakpoint) . $pad;
       }
-
+    } else {
+      $string = mb_substr($string, 0, $limit) . $pad;
     }
 
     return $string;
-
   }
 
   /**
@@ -419,7 +432,7 @@ class TinyseoPlugin extends Plugin
   {
     $config = Grav::instance()['config'];
     $page = Grav::instance()['admin']->page(true);
-    $page_title = self::cleanString($page->title());
+    $page_title = static::cleanString($page->title());
     $site_title = $config['plugins.tinyseo.site_title'];
     $meta_title = isset($site_title) ? $page_title . ' | ' . $site_title : $page_title;
 
@@ -434,7 +447,7 @@ class TinyseoPlugin extends Plugin
     $config = Grav::instance()['config'];
     $page = Grav::instance()['admin']->page(true);
     $page_content = substr(strip_tags($page->content()), 0, 1000);
-    $meta_description = self::cleanText($page_content, $config);
+    $meta_description = static::cleanText($page_content, $config);
 
     return $meta_description;
   }
