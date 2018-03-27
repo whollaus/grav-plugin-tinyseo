@@ -6,5 +6,6 @@ meta_robots:
   nofollow: false
   noimageindex: false
 description_length: 200
+truncate_break: world
 twitter_card_type: summary_large_image
 

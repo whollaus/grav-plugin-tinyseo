@@ -274,17 +274,31 @@ class TinyseoPlugin extends Plugin
    */
   public static function cleanText($content, $config)
   {
-    $maxLength = $config['plugins.tinyseo.description_length'];
-
     $content = static::cleanMarkdown($content);
 
+    // Max length option
+    $maxLength = $config['plugins.tinyseo.description_length'];
+
+    // Truncate options
+    $truncateBreak = $config['plugins.tinyseo.truncate_break'];
+    if ($truncateBreak === 'character') {
+      $upToBreak = false;
+      $break = ' ';
+    } elseif ($truncateBreak === 'world') {
+      $upToBreak = true;
+      $break = ' ';
+    } elseif ($truncateBreak === 'sentence') {
+      $upToBreak = true;
+      $break = '.';
+    }
+
     // truncate the content to the number of words set in config
-    $contentSmall = static::truncateStringAtWord($content, $maxLength, true);
+    $truncateContent = static::truncateStringAtWord($content, $maxLength, $upToBreak, $break);
 
     // beware if content is less than maxLength words, it will be nulled
-    if ($contentSmall === '') $contentSmall = $content;
+    if ($truncateContent === '') $truncateContent = $content;
 
-    return $contentSmall;
+    return $truncateContent;
   }
 
   /**
@@ -302,13 +316,15 @@ class TinyseoPlugin extends Plugin
   /**
    * Truncate string at word
    */
-  private static function truncateStringAtWord($string, $limit, $up_to_break = false, $break = " ", $pad = "&hellip;")
+  private static function truncateStringAtWord($string, $limit, $upToBreak = false, $break = ' ')
   {
+    $pad = '&hellip;';
+
     // return with no change if string is shorter than $limit
     if (mb_strlen($string) <= $limit) return $string;
 
     // is $break present between $limit and the end of the string?
-    if ($up_to_break && false !== ($breakpoint = mb_strpos($string, $break, $limit))) {
+    if ($upToBreak && false !== ($breakpoint = mb_strpos($string, $break, $limit))) {
       if ($breakpoint < mb_strlen($string) - 1) {
         $string = mb_substr($string, 0, $breakpoint) . $pad;
       }
