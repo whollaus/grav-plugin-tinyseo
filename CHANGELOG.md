@@ -1,3 +1,15 @@
+# v1.0.9
+## 03/27/2018
+
+1. [](#bugfix)
+   * fix wrong version
+
+# v1.0.8
+## 03/27/2018
+
+1. [](#new)
+   * add option to choose description truncate method
+
 # v1.0.7
 ## 03/26/2018
 
