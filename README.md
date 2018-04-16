@@ -91,9 +91,7 @@ The twitter card design to use when a page is shared.
 You can choose between 2 mode:
 
 * **summary**: _The Summary Card can be used for many kinds of web content, from blog posts and news articles, to products and restaurants. It is designed to give the reader a preview of the content before clicking through to your website._
-* **summary large image**: _The Summary Card with Large Image features a large, full-width prominent image alongside a tweet. It is designed to give the reader a rich photo experience, and clicking on the image brings the user to your website.
-
-._
+* **summary large image**: _The Summary Card with Large Image features a large, full-width prominent image alongside a tweet. It is designed to give the reader a rich photo experience, and clicking on the image brings the user to your website._
 
 #### Twitter ID
 
