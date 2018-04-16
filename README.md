@@ -1,6 +1,6 @@
 # Tiny SEO Plugin 🎢
 
-The **Tiny SEO** Plugin is for [Grav CMS](http://github.com/getgrav/grav) that provide a simple way to manage SEO from admin.
+**Tiny SEO** is a plugin for [Grav CMS](http://github.com/getgrav/grav) that provide a simple way to manage SEO from admin.
 
 ## 📦 Installation
 
