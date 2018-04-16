@@ -101,7 +101,7 @@ Your **twiter username** is used to add twitter meta.
 
 Your **facebook app ID** is used to add twitter meta.
 
-### Override default on specific page
+### Override default settings on specific page
 
 If Tiny Seo is correctly configured and enabled you will see a new SEO tab when editing a page in the admin.
 
