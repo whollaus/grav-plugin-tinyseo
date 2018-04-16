@@ -1,6 +1,13 @@
-# Tiny SEO Plugin 🎢
+# Tiny SEO Plugin 🏆
 
-The **Tiny SEO** Plugin is for [Grav CMS](http://github.com/getgrav/grav) that provide a simple way to manage SEO from admin.
+**Tiny SEO** is a plugin for [Grav CMS](http://github.com/getgrav/grav) that provide a simple way to manage SEO from admin.
+
+<p align="center">
+  <img width="480" height="301" src="https://media.giphy.com/media/3o7TKJhBfNCiispgDm/giphy.gif">
+  <br>
+  Get your website to the top of search engine!!!
+</p>
+
 
 ## 📦 Installation
 
@@ -91,9 +98,7 @@ The twitter card design to use when a page is shared.
 You can choose between 2 mode:
 
 * **summary**: _The Summary Card can be used for many kinds of web content, from blog posts and news articles, to products and restaurants. It is designed to give the reader a preview of the content before clicking through to your website._
-* **summary large image**: _The Summary Card with Large Image features a large, full-width prominent image alongside a tweet. It is designed to give the reader a rich photo experience, and clicking on the image brings the user to your website.
-
-._
+* **summary large image**: _The Summary Card with Large Image features a large, full-width prominent image alongside a tweet. It is designed to give the reader a rich photo experience, and clicking on the image brings the user to your website._
 
 #### Twitter ID
 
@@ -103,7 +108,7 @@ Your **twiter username** is used to add twitter meta.
 
 Your **facebook app ID** is used to add twitter meta.
 
-### Override default on specific page
+### Override default settings on specific page
 
 If Tiny Seo is correctly configured and enabled you will see a new SEO tab when editing a page in the admin.
 
