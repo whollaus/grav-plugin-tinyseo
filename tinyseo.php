@@ -361,7 +361,8 @@ class TinyseoPlugin extends Plugin
     $page = $this->grav['page'];
     $header = $page->header();
     $page_content = substr(strip_tags($page->content()), 0, 1000);
-    $default_description = $this->cleanText($page_content, $config);
+    $clean_page_content = $this->cleanText($page_content, $config);
+    $default_description = strlen($clean_page_content) !== 0 ? $clean_page_content : " ";
     $meta_description = isset($header->override_default_desc) ? $header->override_default_desc : $default_description;
 
     return $meta_description;
