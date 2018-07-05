@@ -1,3 +1,9 @@
+# v1.1.2
+## 07/05/2018
+
+1. [](#improved)
+   * Fix empty description when page doesn't have content
+
 # v1.1.1
 ## 04/16/2018
 
