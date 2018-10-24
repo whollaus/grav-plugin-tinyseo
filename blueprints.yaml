@@ -32,6 +32,14 @@ form:
                 0: PLUGIN_ADMIN.DISABLED
               validate:
                 type: bool
+            position:
+              type: toggle
+              label: PLUGIN_TINYSEO.POSITION
+              highlight: tab
+              default: tab
+              options:
+                tab: PLUGIN_TINYSEO.TAB
+                options: PLUGIN_ADMIN.OPTIONS
             robots_section:
               type: section
               title: Robots

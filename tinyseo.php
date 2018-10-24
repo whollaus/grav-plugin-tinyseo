@@ -100,7 +100,16 @@ class TinyseoPlugin extends Plugin
       if (!$inEvent && $blueprint->get('form/fields/tabs', null, '/')) {
         $inEvent = true;
         $blueprints = new Blueprints(__DIR__ . '/blueprints/');
-        $extends = $blueprints->get($this->name);
+
+        // Display the form under Options
+        if (isset($this->config['plugins.tinyseo.position']) && $this->config['plugins.tinyseo.position'] == 'options') {
+          $extends = $blueprints->get('tinyseo_options.yaml');
+
+        //  Display the form as a tab
+        } else {
+          $extends = $blueprints->get('tinyseo_tab.yaml');
+        }
+
         $blueprint->extend($extends, true);
         $inEvent = false;
       }
