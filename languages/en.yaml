@@ -11,3 +11,5 @@ PLUGIN_TINYSEO:
   SITE_TITLE: Site title
   TWITTER: Select twitter card type
   TITLE: Title
+  TAB: Tab
+  POSITION: Position
